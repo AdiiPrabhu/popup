@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Popup Example</title>
+<style>
+  body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+button{
+  --btn-color: rgb(124 45 18);
+  --btn-bg: rgb(252 211 77);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
+  padding: 14px 22px;
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: system-ui;
+  border: 2px solid var(--btn-color);
+  transition: 100ms ease;
+  box-shadow: 5px 5px 0 0 var(--btn-color);
+
+}
+  /* Style for the popup container */
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: 30px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+  }
+  /* Style for the overlay */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+</style>
+</head>
+<body>
+
+<!-- Button to open Popup 1 -->
+<button onclick="openPopup('popup1')">Open Popup 1</button>
+
+<!-- Button to open Popup 2 -->
+<button onclick="openPopup('popup2')">Open Popup 2</button>
+
+<!-- Popup 1 -->
+<div id="popup1" class="popup-container modal" role="dialog">
+  <h2>Popup 1</h2>
+  <p>This is the content of Popup 1.</p>
+  <button onclick="closePopup('popup1')">Close</button>
+</div>
+
+<!-- Popup 2 -->
+<div id="popup2" class="popup-container modal" role="dialog">
+  <h2>Popup 2</h2>
+  <p>This is the content of Popup 2.</p>
+  <button onclick="closePopup('popup2')">Close</button>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" onclick="closeAllPopups()"></div>
+
+<script>
+  // Function to open a specific popup
+  function openPopup(id) {
+    document.getElementById(id).style.display = "block";
+    document.querySelector('.overlay').style.display = "block";
+  }
+
+  // Function to close a specific popup
+  function closePopup(id) {
+    document.getElementById(id).style.display = "none";
+    document.querySelector('.overlay').style.display = "none";
+  }
+
+  // Function to close all popups
+  function closeAllPopups() {
+    var popups = document.querySelectorAll('.popup-container');
+    popups.forEach(function(popup) {
+      popup.style.display = "none";
+    });
+    document.querySelector('.overlay').style.display = "none";
+  }
+</script>
+
+</body>
+</html>
